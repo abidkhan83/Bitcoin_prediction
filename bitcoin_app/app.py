@@ -4,18 +4,14 @@ import pandas as pd
 import pickle
 from datetime import datetime
 
-# ========================
 # Load Saved Models
-# ========================
 reg_model = pickle.load(open("best_regression_model.pkl", "rb"))
 class_model = pickle.load(open("best_bitcoin_classification_model.pkl", "rb"))
 scaler = pickle.load(open("scaler_class.pkl", "rb"))
 
 app = Flask(__name__)
 
-# ========================
 # Feature Engineering Functions
-# ========================
 
 def create_technical_indicators(df):
     df = df.copy()
@@ -92,17 +88,14 @@ def create_time_features(df):
     return df
 
 
-# ========================
 # Route: Home Page
-# ========================
 @app.route('/')
 def home():
     return render_template('index.html')
 
 
-# ========================
 # Route: Predict
-# ========================
+
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
